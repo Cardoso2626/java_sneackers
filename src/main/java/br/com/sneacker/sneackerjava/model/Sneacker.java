@@ -1,0 +1,82 @@
+package br.com.sneacker.sneackerjava.model;
+
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "tb_sneacker")
+public class Sneacker {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String nome;
+    private String marca;
+    private Double preco;
+    private String imagem;
+    private Boolean adquirido;
+    private Musica musica;
+    private Usuario usuario;
+
+
+    public Sneacker(){
+
+    }
+
+
+    public Sneacker(Long id, String nome, String marca, Double preco, String imagem, Boolean adquirido) {
+        this.id = id;
+        this.nome = nome;
+        this.marca = marca;
+        this.preco = preco;
+        this.imagem = imagem;
+        this.adquirido = adquirido;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public Double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(Double preco) {
+        this.preco = preco;
+    }
+
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    public Boolean getAdquirido() {
+        return adquirido;
+    }
+
+    public void setAdquirido(Boolean adquirido) {
+        this.adquirido = adquirido;
+    }
+}
