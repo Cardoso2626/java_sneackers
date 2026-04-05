@@ -1,6 +1,7 @@
 package br.com.sneacker.sneackerjava.model;
 
 import jakarta.persistence.*;
+import org.springframework.resilience.annotation.EnableResilientMethods;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class Usuario {
     private String nomeCompleto;
     private String cpf;
     private String senha;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuario")
     private List<Sneacker> sneackers;
 
 

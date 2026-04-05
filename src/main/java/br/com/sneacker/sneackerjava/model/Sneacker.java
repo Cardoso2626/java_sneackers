@@ -14,7 +14,11 @@ public class Sneacker {
     private Double preco;
     private String imagem;
     private Boolean adquirido;
+    @ManyToOne
+    @JoinColumn(name = "musica_id")
     private Musica musica;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
 

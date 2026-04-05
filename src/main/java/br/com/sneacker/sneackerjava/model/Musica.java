@@ -2,6 +2,8 @@ package br.com.sneacker.sneackerjava.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_musica")
 public class Musica {
@@ -9,6 +11,8 @@ public class Musica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "musica")
+    private List<Sneacker> sneackers;
 
     public Musica() {
 
