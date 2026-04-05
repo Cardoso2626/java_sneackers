@@ -14,12 +14,24 @@ public class Musica {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "musica")
     private List<Sneacker> sneackers;
 
+
+
+
     public Musica() {
 
     }
-    public Musica(Long id, String nome) {
+    public Musica(Long id, String nome, List<Sneacker> sneackers) {
         this.id = id;
         this.nome = nome;
+        this.sneackers = sneackers;
+    }
+
+    public List<Sneacker> getSneackers() {
+        return sneackers;
+    }
+
+    public void setSneackers(List<Sneacker> sneackers) {
+        this.sneackers = sneackers;
     }
 
     public Long getId() {
