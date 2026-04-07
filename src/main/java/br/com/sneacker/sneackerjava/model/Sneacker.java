@@ -27,13 +27,31 @@ public class Sneacker {
     }
 
 
-    public Sneacker(Long id, String nome, String marca, Double preco, String imagem, Boolean adquirido) {
+    public Sneacker(Long id, String nome, String marca, Double preco, String imagem, Boolean adquirido, Musica musica, Usuario usuario) {
         this.id = id;
         this.nome = nome;
         this.marca = marca;
         this.preco = preco;
         this.imagem = imagem;
         this.adquirido = adquirido;
+        this.musica = musica;
+        this.usuario = usuario;
+    }
+
+    public Musica getMusica() {
+        return musica;
+    }
+
+    public void setMusica(Musica musica) {
+        this.musica = musica;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Long getId() {
