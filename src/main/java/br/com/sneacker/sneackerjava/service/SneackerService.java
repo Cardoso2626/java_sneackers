@@ -38,20 +38,20 @@ public class SneackerService {
                 )).collect(Collectors.toList());
     }
 
-    public SneackerResponse criarSneacer(SneackerRequest sneackerRequest, String nomeMusica, String emailUsuario) {
+    public SneackerResponse criarSneacker(SneackerRequest sneackerRequest) {
         Sneacker sneacker = new Sneacker();
         sneacker.setNome(sneackerRequest.getNome());
         sneacker.setMarca(sneackerRequest.getMarca());
         sneacker.setPreco(sneackerRequest.getPreco());
         sneacker.setAdquirido(sneackerRequest.getAdquirido());
         if (sneackerRequest.getNomeMusica() != null){
-            Musica musica = musicaRepository.findByNome(nomeMusica).orElseThrow(() -> new RuntimeException ("Não foi possível encontrar a música: " + nomeMusica));
+            Musica musica = musicaRepository.findByNome(sneackerRequest.getNomeMusica()).orElseThrow(() -> new RuntimeException ("Não foi possível encontrar a música: " + sneackerRequest.getNomeMusica()));
             sneacker.setMusica(musica);
         } else{
             sneacker.setMusica(null);
         }
         if (sneackerRequest.getEmailUsuario() != null) {
-            Usuario usuario = usuarioRepository.findByEmail(emailUsuario).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + emailUsuario));
+            Usuario usuario = usuarioRepository.findByEmail(sneackerRequest.getEmailUsuario()).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + sneackerRequest.getEmailUsuario()));
             sneacker.setUsuario(usuario);
         }else{
             sneacker.setUsuario(null);
@@ -75,18 +75,18 @@ public class SneackerService {
         sneackerRepository.delete(sneacker);
     }
 
-    public SneackerResponse atualizarSneacker (SneackerRequest sneackerRequest, Long id, String nomeMusica, String emailUsuario) {
+    public SneackerResponse atualizarSneacker (SneackerRequest sneackerRequest, Long id) {
         Sneacker sneacker = sneackerRepository.findById(id).orElseThrow(() -> new RuntimeException("Sneacker não encontrado"));
         sneacker.setNome(sneackerRequest.getNome());
         sneacker.setMarca(sneackerRequest.getMarca());
         sneacker.setPreco(sneackerRequest.getPreco());
         sneacker.setAdquirido(sneackerRequest.getAdquirido());
         if (sneackerRequest.getNomeMusica() != null){
-            Musica musica = musicaRepository.findByNome(nomeMusica).orElseThrow(() -> new RuntimeException ("Não foi possível encontrar a música: " + nomeMusica));
+            Musica musica = musicaRepository.findByNome(sneackerRequest.getNomeMusica()).orElseThrow(() -> new RuntimeException ("Não foi possível encontrar a música: " + sneackerRequest.getNomeMusica()));
             sneacker.setMusica(musica);
         }
         if (sneackerRequest.getEmailUsuario() != null) {
-            Usuario usuario = usuarioRepository.findByEmail(emailUsuario).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + emailUsuario));
+            Usuario usuario = usuarioRepository.findByEmail(sneackerRequest.getEmailUsuario()).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + sneackerRequest.getEmailUsuario()));
             sneacker.setUsuario(usuario);
         }
 

@@ -27,7 +27,7 @@ public class SneackerController {
 
     @PostMapping("/criar")
     public ResponseEntity<SneackerResponse> criarSneacker(@RequestBody @Valid SneackerRequest sneackerRequest) {
-        SneackerResponse sneacker = sneackerService.criarSneacer(sneackerRequest, sneackerRequest.getNomeMusica(), sneackerRequest.getEmailUsuario());
+        SneackerResponse sneacker = sneackerService.criarSneacker(sneackerRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(sneacker);
     }
 
@@ -38,7 +38,7 @@ public class SneackerController {
 
     @PutMapping("/{id}")
     public ResponseEntity<SneackerResponse> atualizarSneacker(@PathVariable Long id, @RequestBody @Valid SneackerRequest sneackerRequest){
-        SneackerResponse sneacker = sneackerService.atualizarSneacker(sneackerRequest, id, sneackerRequest.getNomeMusica(), sneackerRequest.getEmailUsuario());
+        SneackerResponse sneacker = sneackerService.atualizarSneacker(sneackerRequest, id);
         return ResponseEntity.ok(sneacker);
     }
 }
