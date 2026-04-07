@@ -68,6 +68,10 @@ public class SneackerService {
                 sneacker.getMusica() != null ? sneacker.getMusica().getNome() : null,
                 sneacker.getUsuario() != null ? sneacker.getUsuario().getEmail() : null
         );
+    }
 
+    public void deletarSneacker(Long id){
+        Sneacker sneacker = sneackerRepository.findById(id).orElseThrow(() -> new RuntimeException("Sneacker não identificado!"));
+        sneackerRepository.delete(sneacker);
     }
 }

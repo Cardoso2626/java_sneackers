@@ -1,8 +1,13 @@
 package br.com.sneacker.sneackerjava.controller;
 
+import br.com.sneacker.sneackerjava.dto.SneackerRequest;
+import br.com.sneacker.sneackerjava.dto.SneackerResponse;
 import br.com.sneacker.sneackerjava.service.SneackerService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/tenis")
@@ -10,5 +15,23 @@ public class SneackerController {
     public final SneackerService sneackerService;
     public SneackerController(SneackerService sneackerService) {
         this.sneackerService = sneackerService;
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<SneackerResponse>> listar(){
+        List<SneackerResponse> sneackers = sneackerService.listarSneackers();
+        return ResponseEntity.status(HttpStatus.OK).body(sneackers);
+    }
+
+
+    @PostMapping("/criar")
+    public ResponseEntity<SneackerResponse> criarSneacker(@RequestBody SneackerRequest sneackerRequest) {
+        SneackerResponse sneacker = sneackerService.criarSneacer(sneackerRequest, sneackerRequest.getNomeMusica(), sneackerRequest.getEmailUsuario());
+        return ResponseEntity.status(HttpStatus.CREATED).body(sneacker);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarSneacker(@PathVariable Long id){
+        sneackerService.deletarSneacker(id);
     }
 }
