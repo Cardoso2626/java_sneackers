@@ -74,4 +74,31 @@ public class SneackerService {
         Sneacker sneacker = sneackerRepository.findById(id).orElseThrow(() -> new RuntimeException("Sneacker não identificado!"));
         sneackerRepository.delete(sneacker);
     }
+
+    public SneackerResponse atualizarSneacker (SneackerRequest sneackerRequest, Long id, String nomeMusica, String emailUsuario) {
+        Sneacker sneacker = sneackerRepository.findById(id).orElseThrow(() -> new RuntimeException("Sneacker não encontrado"));
+        sneacker.setNome(sneackerRequest.getNome());
+        sneacker.setMarca(sneackerRequest.getMarca());
+        sneacker.setPreco(sneackerRequest.getPreco());
+        sneacker.setAdquirido(sneackerRequest.getAdquirido());
+        if (sneackerRequest.getNomeMusica() != null){
+            Musica musica = musicaRepository.findByNome(nomeMusica).orElseThrow(() -> new RuntimeException ("Não foi possível encontrar a música: " + nomeMusica));
+            sneacker.setMusica(musica);
+        }
+        if (sneackerRequest.getEmailUsuario() != null) {
+            Usuario usuario = usuarioRepository.findByEmail(emailUsuario).orElseThrow(() -> new RuntimeException("O usuário não pode ser encontrado: " + emailUsuario));
+            sneacker.setUsuario(usuario);
+        }
+
+        sneacker = sneackerRepository.save(sneacker);
+        return new SneackerResponse(
+                sneacker.getId(),
+                sneacker.getNome(),
+                sneacker.getMarca(),
+                sneacker.getPreco(),
+                sneacker.getAdquirido(),
+                sneacker.getMusica() != null ? sneacker.getMusica().getNome() : null,
+                sneacker.getUsuario() != null ? sneacker.getUsuario().getEmail() : null
+        );
+    }
 }

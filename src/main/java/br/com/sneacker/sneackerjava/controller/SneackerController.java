@@ -3,6 +3,7 @@ package br.com.sneacker.sneackerjava.controller;
 import br.com.sneacker.sneackerjava.dto.SneackerRequest;
 import br.com.sneacker.sneackerjava.dto.SneackerResponse;
 import br.com.sneacker.sneackerjava.service.SneackerService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class SneackerController {
 
 
     @PostMapping("/criar")
-    public ResponseEntity<SneackerResponse> criarSneacker(@RequestBody SneackerRequest sneackerRequest) {
+    public ResponseEntity<SneackerResponse> criarSneacker(@RequestBody @Valid SneackerRequest sneackerRequest) {
         SneackerResponse sneacker = sneackerService.criarSneacer(sneackerRequest, sneackerRequest.getNomeMusica(), sneackerRequest.getEmailUsuario());
         return ResponseEntity.status(HttpStatus.CREATED).body(sneacker);
     }
@@ -33,5 +34,11 @@ public class SneackerController {
     @DeleteMapping("/{id}")
     public void deletarSneacker(@PathVariable Long id){
         sneackerService.deletarSneacker(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<SneackerResponse> atualizarSneacker(@PathVariable Long id, @RequestBody @Valid SneackerRequest sneackerRequest){
+        SneackerResponse sneacker = sneackerService.atualizarSneacker(sneackerRequest, id, sneackerRequest.getNomeMusica(), sneackerRequest.getEmailUsuario());
+        return ResponseEntity.ok(sneacker);
     }
 }
