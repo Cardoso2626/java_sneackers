@@ -21,12 +21,12 @@ public class MusicaService {
         this.sneackerRepository = sneackerRepository;
     }
 
-    public MusicaResponse criarMusica(MusicaRequest musicaRequest, List<Long> ids) {
+    public MusicaResponse criarMusica(MusicaRequest musicaRequest) {
         Musica musica = new Musica();
         musica.setNome(musicaRequest.nome());
         List<Long> idSneackers = new ArrayList<>();
         if(musicaRequest.idSneackers() != null) {
-            List<Sneacker> sneackers =  sneackerRepository.findAllById(ids);
+            List<Sneacker> sneackers =  sneackerRepository.findAllById(musicaRequest.idSneackers());
             idSneackers = sneackers.stream().map(Sneacker::getId).collect(Collectors.toList());
             musica.setSneackers(sneackers);
         }else{

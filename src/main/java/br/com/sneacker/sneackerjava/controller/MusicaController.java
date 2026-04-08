@@ -4,7 +4,12 @@ import br.com.sneacker.sneackerjava.dto.MusicaRequest;
 import br.com.sneacker.sneackerjava.dto.MusicaResponse;
 import br.com.sneacker.sneackerjava.model.Musica;
 import br.com.sneacker.sneackerjava.service.MusicaService;
-import br.com.sneacker.sneackerjava.service.SneackerService;
+
+import org.apache.coyote.Response;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,12 +19,16 @@ import java.util.List;
 @RequestMapping("/musica")
 public class MusicaController {
     public final MusicaService musicaService;
-    public final SneackerService sneackerService;
-    public MusicaController(MusicaService musicaService, SneackerService sneackerService) {
+    public MusicaController(MusicaService musicaService) {
         this.musicaService = musicaService;
-        this.sneackerService = sneackerService;
     }
 
+
+    @PostMapping("/criar")
+    public ResponseEntity<MusicaResponse> criarMusica(@RequestBody MusicaRequest musicaRequest){
+        MusicaResponse musica =  musicaService.criarMusica(musicaRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(musica);
+    }
 
 
 }
