@@ -19,7 +19,7 @@ public class SneackerController {
     }
 
     @GetMapping("/listar")
-    public ResponseEntity<List<SneackerResponse>> listar(){
+    public ResponseEntity<List<SneackerResponse>> listarSneackers(){
         List<SneackerResponse> sneackers = sneackerService.listarSneackers();
         return ResponseEntity.status(HttpStatus.OK).body(sneackers);
     }

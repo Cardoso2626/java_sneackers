@@ -51,7 +51,7 @@ public class MusicaService {
 
     }
 
-    public void deletar(Long id) {
+    public void deletarMusica(Long id) {
         musicaRepository.deleteById(id);
     }
 

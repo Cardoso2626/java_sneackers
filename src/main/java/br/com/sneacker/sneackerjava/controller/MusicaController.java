@@ -35,7 +35,7 @@ public class MusicaController {
 
     @DeleteMapping("/{id}")
     public void deletarMusica(@PathVariable Long id){
-        musicaService.deletar(id);
+        musicaService.deletarMusica(id);
     }
 
 
