@@ -39,4 +39,21 @@ public class MusicaService {
         );
 
     }
+
+    public MusicaResponse pegarPorId(Long id) {
+        Musica musica = musicaRepository.findById(id).orElseThrow(() -> new RuntimeException("Musica não encontrada"));
+        List<Long> sneackersIds = musica.getSneackers() != null ? musica.getSneackers().stream().map(Sneacker::getId).collect(Collectors.toList()) : new ArrayList<>();
+        return new MusicaResponse(
+                musica.getNome(),
+                sneackersIds
+
+        );
+
+    }
+
+    public void deletar(Long id) {
+        musicaRepository.deleteById(id);
+    }
+
+
 }

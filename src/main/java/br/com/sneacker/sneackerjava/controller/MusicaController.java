@@ -8,10 +8,7 @@ import br.com.sneacker.sneackerjava.service.MusicaService;
 import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,6 +25,17 @@ public class MusicaController {
     public ResponseEntity<MusicaResponse> criarMusica(@RequestBody MusicaRequest musicaRequest){
         MusicaResponse musica =  musicaService.criarMusica(musicaRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(musica);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MusicaResponse> pegarMusica(@PathVariable Long id){
+        MusicaResponse musica = musicaService.pegarPorId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(musica);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarMusica(@PathVariable Long id){
+        musicaService.deletar(id);
     }
 
 
