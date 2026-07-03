@@ -75,7 +75,7 @@ public class SneakerService {
         sneaker.setAdquirido(sneakerRequest.getAdquirido());
 
         if (sneakerRequest.getNomeMusica() != null){
-            Musica musica = musicaRepository.findByNome(sneakerRequest.getNomeMusica())
+            Musica musica = musicaRepository.findByNomeIgnoreCase(sneakerRequest.getNomeMusica())
                     .orElseThrow(() -> new RuntimeException("Não foi possível encontrar a música: " + sneakerRequest.getNomeMusica()));
             sneaker.setMusica(musica);
         } else {
@@ -133,7 +133,7 @@ public class SneakerService {
         sneaker.setAdquirido(sneakerRequest.getAdquirido());
 
         if (sneakerRequest.getNomeMusica() != null){
-            Musica musica = musicaRepository.findByNome(sneakerRequest.getNomeMusica())
+            Musica musica = musicaRepository.findByNomeIgnoreCase(sneakerRequest.getNomeMusica())
                     .orElseThrow(() -> new RuntimeException("Não foi possível encontrar a música: " + sneakerRequest.getNomeMusica()));
             sneaker.setMusica(musica);
         }

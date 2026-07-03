@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface MusicaRepository extends JpaRepository<Musica, Long> {
-    Optional<Musica> findByNome(String nome);
+    Optional<Musica> findByNomeIgnoreCase(String nome);
 }

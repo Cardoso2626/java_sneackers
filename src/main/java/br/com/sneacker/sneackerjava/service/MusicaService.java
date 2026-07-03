@@ -63,7 +63,7 @@ public class MusicaService {
 
 
     public MusicaResponse pegarPorNome(String nome){
-        Musica musica  = musicaRepository.findByNome(nome).orElseThrow(() -> new RuntimeException("Nome da música não encontrado!"));
+        Musica musica  = musicaRepository.findByNomeIgnoreCase(nome).orElseThrow(() -> new RuntimeException("Nome da música não encontrado!"));
         List<Long> sneakersIds = musica.getSneakers() != null
                 ? musica.getSneakers().stream().map(Sneaker::getId).collect(Collectors.toList())
                 : new ArrayList<>();

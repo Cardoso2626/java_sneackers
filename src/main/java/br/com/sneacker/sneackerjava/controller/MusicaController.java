@@ -28,8 +28,8 @@ public class MusicaController {
         MusicaResponse musica = musicaService.pegarPorId(id);
         return ResponseEntity.status(HttpStatus.OK).body(musica);
     }
-    @GetMapping("/{nome}")
-    public ResponseEntity<MusicaResponse> pegarMusicaPorNome(@PathVariable String nome){
+    @GetMapping
+    public ResponseEntity<MusicaResponse> pegarMusicaPorNome(@RequestParam String nome){
         MusicaResponse musica = musicaService.pegarPorNome(nome);
         return ResponseEntity.status(HttpStatus.OK).body(musica);
     }
