@@ -43,6 +43,7 @@ public class SecurityConfiguration {
                                 .requestMatchers(HttpMethod.DELETE, "/usuario/{id}").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/musica/criar").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.GET, "/musica/{id}").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/musica/{nome}").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/musica/{id}").hasRole("ADMIN")
                                 .anyRequest().authenticated()
                 )
