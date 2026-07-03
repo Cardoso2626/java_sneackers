@@ -29,7 +29,7 @@ public class MusicaController {
         return ResponseEntity.status(HttpStatus.OK).body(musica);
     }
     @GetMapping("/{nome}")
-    public ResponseEntity<MusicaResponse> pegarMusica(@PathVariable String nome){
+    public ResponseEntity<MusicaResponse> pegarMusicaPorNome(@PathVariable String nome){
         MusicaResponse musica = musicaService.pegarPorNome(nome);
         return ResponseEntity.status(HttpStatus.OK).body(musica);
     }
