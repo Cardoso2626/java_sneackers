@@ -3,8 +3,6 @@ package br.com.sneacker.sneackerjava.controller;
 import br.com.sneacker.sneackerjava.dto.MusicaRequest;
 import br.com.sneacker.sneackerjava.dto.MusicaResponse;
 import br.com.sneacker.sneackerjava.service.MusicaService;
-
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +26,11 @@ public class MusicaController {
     @GetMapping("/{id}")
     public ResponseEntity<MusicaResponse> pegarMusica(@PathVariable Long id){
         MusicaResponse musica = musicaService.pegarPorId(id);
+        return ResponseEntity.status(HttpStatus.OK).body(musica);
+    }
+    @GetMapping("/{nome}")
+    public ResponseEntity<MusicaResponse> pegarMusica(@PathVariable String nome){
+        MusicaResponse musica = musicaService.pegarPorNome(nome);
         return ResponseEntity.status(HttpStatus.OK).body(musica);
     }
 

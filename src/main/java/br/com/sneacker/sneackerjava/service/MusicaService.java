@@ -61,10 +61,26 @@ public class MusicaService {
         );
     }
 
+
+    public MusicaResponse pegarPorNome(String nome){
+        Musica musica  = musicaRepository.findByNome(nome).orElseThrow(() -> new RuntimeException("Nome da música não encontrado!"));
+        List<Long> sneakersIds = musica.getSneakers() != null
+                ? musica.getSneakers().stream().map(Sneaker::getId).collect(Collectors.toList())
+                : new ArrayList<>();
+
+        return new MusicaResponse(
+                musica.getNome(),
+                sneakersIds
+        );
+
+    }
+
     @Transactional
-    @CacheEvict(value = "musica", key = "#id")
+    @CacheEvict(value = {"musica"}, key = "#id")
     public void deletarMusica(Long id) {
         Musica musica = musicaRepository.findById(id).orElseThrow(() -> new RuntimeException("Musica não encontrada"));
         musicaRepository.deleteById(id);
     }
+
+
 }
